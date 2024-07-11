@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { formatUrlString } from "../BlogCard";
+import { useAppContext } from "../../context/authProvider";
 
 function PostSidebar({ cateLink, singlePostLink }) {
+  const { formatUrlString } = useAppContext();
+
   return (
     <>
       <aside>

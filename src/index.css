@@ -220,6 +220,8 @@ textarea {
     display: block;
     overflow: hidden;
     position: relative;
+    width: 100%;
+    height: 250px;
 
     img {
       transition: 0.7s;
@@ -245,6 +247,11 @@ textarea {
     .blog_head {
       color: var(--heading-color);
       font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      display: -webkit-box;
     }
     .leading-none {
       transition: 0.7s;
@@ -506,4 +513,9 @@ button:active {
   transform-origin: top right;
   top: 100%;
   right: 0;
+}
+
+.publish_btn:disabled {
+  cursor: no-drop;
+  background-color: #831f0b;
 }

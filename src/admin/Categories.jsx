@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useAppContext } from "../context/authProvider";
 import { Link } from "react-router-dom";
-import useAllCategory from "../utilities/useAllCategory";
 import { toast } from "react-toastify";
+import useAllPosts from "../utilities/useAllPosts";
 
 function Categories() {
   const [category, setCategory] = useState("");
   const { addCategory, loading } = useAppContext();
-  const { allCategory, isFecthing } = useAllCategory();
+  const { allPosts, isFetching } = useAllPosts("categories");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +15,7 @@ function Categories() {
       toast.error("Empthy Catory will not add!");
       return;
     }
-    if (allCategory.find((data) => data.data == category.trim())) {
+    if (allPosts.find((data) => data.data == category.trim())) {
       toast.error(`${category} is already added`);
       return;
     }
@@ -84,7 +84,7 @@ function Categories() {
           <div className="flex-1">
             <h2 className="text-2xl font-semibold mb-4">Categories</h2>
             <div className="flex items-center gap-4 flex-wrap">
-              {isFecthing ? (
+              {isFetching ? (
                 <div className="grid grid-cols-4 gap-4">
                   {[...Array(8)].map((_, index) => (
                     <div key={index} className="animate-pulse">
@@ -95,7 +95,7 @@ function Categories() {
                   ))}
                 </div>
               ) : (
-                allCategory.map((cat) => {
+                allPosts.map((cat) => {
                   const cateLink = cat.data.replace(/\s+/g, "-").toLowerCase();
                   return (
                     <Link

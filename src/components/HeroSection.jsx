@@ -1,12 +1,14 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
 import SlideCardSkeleton from "../skeleton/SlideCardSkeleton";
+import useAllPosts from "../utilities/useAllPosts";
+import { Link } from "react-router-dom";
 
 function HeroSection() {
-  const [loading, setLoading] = useState(false);
+  const { allPosts, isFetching } = useAllPosts("blogPosts");
 
   const colors = [
     "#be123c",
@@ -18,33 +20,6 @@ function HeroSection() {
     "#15803d",
     "#b45309",
     "#dc2626",
-  ];
-
-  const blogs = [
-    {
-      category: "sports",
-      blogTitle: "The blog was launched asresult organizing",
-    },
-    {
-      category: "technology",
-      blogTitle: "Have a look through a handful of the top blogs",
-    },
-    {
-      category: "business",
-      blogTitle: "Marketing agency, some of our content clusters are",
-    },
-    {
-      category: "sports",
-      blogTitle: "The blog was launched asresult organizing",
-    },
-    {
-      category: "technology",
-      blogTitle: "Have a look through a handful of the top blogs",
-    },
-    {
-      category: "business",
-      blogTitle: "Marketing agency, some of our content clusters are",
-    },
   ];
 
   return (
@@ -78,71 +53,64 @@ function HeroSection() {
           className="mySwiper"
           modules={[Autoplay, Navigation]}
         >
-          {loading ? (
-            <>
-              <SwiperSlide>
-                <SlideCardSkeleton />
-              </SwiperSlide>
-              <SwiperSlide>
-                <SlideCardSkeleton />
-              </SwiperSlide>
-              <SwiperSlide>
-                <SlideCardSkeleton />
-              </SwiperSlide>
-              <SwiperSlide>
-                <SlideCardSkeleton />
-              </SwiperSlide>
-            </>
-          ) : (
-            blogs.map((blog, index) => {
-              const random = Math.floor(Math.random() * colors.length);
-              return (
+          {isFetching
+            ? [...Array(5)].map((_, index) => (
                 <SwiperSlide key={index}>
-                  <div className="slideCard_wrapper">
-                    <a className="image_handler" href="#">
-                      <img
-                        src="https://themexriver.com/wp/magezix/wp-content/uploads/2022/05/travel-new.jpg"
-                        alt="Title of Post"
-                      />
-                    </a>
-                    <div className="body_content p-6 md:p-16 md:pb-8">
-                      <a
-                        href="#"
-                        className="mb-6 slide_cate_wrapper rounded-sm py-1 md:p-2 px-3 inline-block"
-                        style={{ backgroundColor: colors[random] }}
-                      >
-                        <span className="uppercase text-sm md:text-lg text-white">
-                          {`#${blog.category}`}
-                        </span>
-                      </a>
-                      <a href="#">
-                        <h2 className="mb-6 text-3xl md:text-6xl md:max-w-[75%] text-white font-semibold">
-                          {blog.blogTitle}
-                        </h2>
-                      </a>
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center">
-                          <img
-                            src="../public/assets/admin-vivek.png"
-                            alt=""
-                            className="h-8 w-8 rounded-full mr-2"
-                          />
-                          <span className="text-white text-lg">Vivek</span>
-                        </div>
-                        <span className="text-white mx-2">|</span>
-                        <div className="date">
-                          <i className="bi bi-calendar4-week text-white mr-2"></i>
-                          <span className="text-white text-lg">
-                            25 june, 2024
+                  <SlideCardSkeleton />
+                </SwiperSlide>
+              ))
+            : allPosts.slice(0, 7).map((blog) => {
+                const random = Math.floor(Math.random() * colors.length);
+                return (
+                  <SwiperSlide key={blog.id}>
+                    <div className="slideCard_wrapper">
+                      <Link className="image_handler" to={`/blog/${blog.id}`}>
+                        <img src={blog.postImage} alt={blog.postTitle} />
+                      </Link>
+                      <div className="body_content p-6 md:p-16 md:pb-8">
+                        <Link
+                          to={`/category/${blog.category}`}
+                          className="mb-6 slide_cate_wrapper rounded-sm py-1 md:p-2 px-3 inline-block"
+                          style={{ backgroundColor: colors[random] }}
+                        >
+                          <span className="uppercase text-sm md:text-lg text-white">
+                            {`#${blog.category}`}
                           </span>
+                        </Link>
+                        <Link to={`/blog/${blog.id}`}>
+                          <h2 className="mb-6 text-3xl md:text-6xl md:max-w-[75%] text-white font-semibold">
+                            {blog.postTitle}
+                          </h2>
+                        </Link>
+                        <div className="flex items-center gap-4">
+                          <div className="flex items-center">
+                            <img
+                              src="/assets/admin-vivek.png"
+                              alt="Admin"
+                              className="h-8 w-8 rounded-full mr-2"
+                            />
+                            <span className="text-white text-lg">Admin</span>
+                          </div>
+                          <span className="text-white mx-2">|</span>
+                          <div className="date">
+                            <i className="bi bi-calendar4-week text-white mr-2"></i>
+                            <span className="text-white text-lg">
+                              {new Date(blog.createDate).toLocaleString(
+                                "en-US",
+                                {
+                                  month: "long",
+                                  year: "numeric",
+                                  day: "numeric",
+                                }
+                              )}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </SwiperSlide>
-              );
-            })
-          )}
+                  </SwiperSlide>
+                );
+              })}
         </Swiper>
       </div>
     </>

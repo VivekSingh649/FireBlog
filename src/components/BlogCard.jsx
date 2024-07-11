@@ -1,11 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAppContext } from "../context/authProvider";
 
-export const formatUrlString = (str) => {
-  return str ? str.toLowerCase().replace(/\s+/g, "-") : "";
-};
+function BlogCard({
+  listBlog,
+  singlePostLink = "",
+  cateLink = "",
+  postTitle,
+  postImage,
+  catgory,
+  date,
+}) {
+  const { formatUrlString } = useAppContext();
 
-function BlogCard({ listBlog, singlePostLink = "", cateLink = "" }) {
   return (
     <div className={`${listBlog ? "list" : ""} single-blog-grid`}>
       <Link
@@ -14,16 +21,17 @@ function BlogCard({ listBlog, singlePostLink = "", cateLink = "" }) {
           singlePostLink
         )}`}
       >
-        <img
-          className="border-radius-5"
-          src="https://themexriver.com/wp/magezix/wp-content/uploads/2022/05/travel-new.jpg"
-          alt="img"
-        />
+        <img className="border-radius-5" src={postImage} alt="img" />
       </Link>
       <div className="details">
-        <p className="cat bg-primary-600">NEWS</p>
+        <p className="cat bg-primary-600">{catgory}</p>
         <p className="date mb-2">
-          <i className="bi bi-calendar2-range mr-2"></i> 11 January, 2023
+          <i className="bi bi-calendar2-range mr-2"></i>
+          {new Date(date).toLocaleString("en-us", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })}
         </p>
         <h5 className="mb-3">
           <Link
@@ -32,7 +40,7 @@ function BlogCard({ listBlog, singlePostLink = "", cateLink = "" }) {
             )}`}
             className="text-2xl blog_head"
           >
-            Transforming businesses, one pixel at a time
+            {postTitle}
           </Link>
         </h5>
         <Link

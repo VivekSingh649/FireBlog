@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import BlogCard from "./BlogCard";
 import BlogCardSkeleton from "../skeleton/BlogCardSkeleton";
 import { toast } from "react-toastify";
+import useAllPosts from "../utilities/useAllPosts";
 
 function Posts() {
   const [isActive, setIsActive] = useState(false);
-
+  const { allPosts, isFetching } = useAllPosts("blogPosts");
+  const { allCategory } = useAllPosts("categories");
   return (
     <>
       <div className="main_wrapper">
@@ -31,13 +33,14 @@ function Posts() {
                 <i className="text-xl text-primary-600 bi bi-list-task"></i>
               </div>
               <select name="categories" className="p-4 outline-none">
-                <option value="game" disabled>
+                <option value="" disabled>
                   Filter By Categoires
                 </option>
-                <option value="game">Category</option>
-                <option value="game">Category</option>
-                <option value="game">Category</option>
-                <option value="game">Category</option>
+                {allCategory.map((cate) => (
+                  <option value={cate.data} key={cate.id}>
+                    {cate.data}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -52,10 +55,22 @@ function Posts() {
                 : "gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
             }`}
           >
-            <BlogCard listBlog={isActive} />
-            <BlogCard listBlog={isActive} />
-            <BlogCardSkeleton listBlog={isActive} />
-            <BlogCardSkeleton listBlog={isActive} />
+            {isFetching
+              ? [...Array(8)].map((_, index) => (
+                  <BlogCardSkeleton listBlog={isActive} key={index} />
+                ))
+              : allPosts.map((blog) => (
+                  <BlogCard
+                    listBlog={isActive}
+                    key={blog.id}
+                    singlePostLink={blog.postTitle}
+                    cateLink={blog.category}
+                    postTitle={blog.postTitle}
+                    postImage={blog.postImage}
+                    date={blog.createDate}
+                    catgory={blog.category}
+                  />
+                ))}
           </div>
         </div>
       </div>
