@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 import { auth, database, storage } from "../firebase/firebase";
 import { toast } from "react-toastify";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 
@@ -144,6 +144,16 @@ export const AuthProvider = ({ children }) => {
     return str ? str.toLowerCase().replace(/\s+/g, "-") : "";
   };
 
+  const deletePost = async (id, Fetch) => {
+    try {
+      const postRef = doc(database, "blogPosts", id);
+      await deleteDoc(postRef);
+      Fetch();
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -154,6 +164,7 @@ export const AuthProvider = ({ children }) => {
         handleUpload,
         addPost,
         formatUrlString,
+        deletePost,
       }}
     >
       {!loading.authStateChange && children}

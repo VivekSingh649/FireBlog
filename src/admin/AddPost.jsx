@@ -1,19 +1,25 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TextEditor from "../components/TextEditor";
 import useAllPosts from "../utilities/useAllPosts";
 import { useAppContext } from "../context/authProvider";
 
-function AddPost() {
+function AddPost({ updateBlog, updatePost }) {
   const editorRef = useRef(null);
   const { handleUpload, loading, addPost } = useAppContext();
-  const { allPosts } = useAllPosts("categories");
+  const { allCategory } = useAllPosts();
   const [formData, setFormData] = useState({
     postTitle: "",
     category: "",
     postImage: "",
-    blogContent: "",
+    blogContent: "Write your blog content here...",
     createDate: "",
   });
+
+  useEffect(() => {
+    if (updateBlog) {
+      setFormData(updateBlog);
+    }
+  }, [updateBlog]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -24,10 +30,13 @@ function AddPost() {
     setFormData({ ...formData, blogContent: content });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    addPost(formData);
-    console.log(formData);
+    if (updatePost) {
+      updatePost(formData);
+    } else {
+      addPost(formData);
+    }
   };
 
   return (
@@ -63,7 +72,7 @@ function AddPost() {
                 <option value="" disabled>
                   Select Your Category
                 </option>
-                {allPosts.map((cate, idx) => (
+                {allCategory.map((cate, idx) => (
                   <option value={cate.data} key={idx}>
                     {cate.data}
                   </option>
@@ -73,6 +82,7 @@ function AddPost() {
             <TextEditor
               editorRef={editorRef}
               handleEditorChange={handleEditorChange}
+              initialValue={formData.blogContent}
             />
           </div>
           <div className="col-span-4 p-8">
@@ -149,7 +159,11 @@ function AddPost() {
                   <span className="sr-only">Loading...</span>
                 </div>
               )}
-              {loading.imageUploading ? "Loading..." : "Publish Post"}
+              {loading.imageUploading
+                ? "Loading..."
+                : updateBlog
+                ? "Update Blog"
+                : "Publish Blog"}
             </button>
           </div>
         </form>

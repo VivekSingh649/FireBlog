@@ -1,13 +1,17 @@
 import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
-export default function TextEditor({ editorRef, handleEditorChange }) {
+export default function TextEditor({
+  editorRef,
+  handleEditorChange,
+  initialValue = "Write your blog content here...",
+}) {
   return (
     <>
       <Editor
         apiKey="802adbao7qmse7otfvqdnjzcs4j3vh86axbry4hij8v0iujs"
         onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue="Write your blog content here..."
+        initialValue={initialValue}
         init={{
           height: 500,
           menubar: false,

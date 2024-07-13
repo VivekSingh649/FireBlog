@@ -16,7 +16,7 @@ function Admin() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/add-post" element={<AddPost />} />
             <Route path="/add-category" element={<Categories />} />
-            <Route path="/update-post" element={<Update />} />
+            <Route path="/update-post/:id" element={<Update />} />
           </Routes>
         </main>
       </div>

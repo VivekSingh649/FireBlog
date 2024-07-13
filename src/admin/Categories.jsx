@@ -6,8 +6,8 @@ import useAllPosts from "../utilities/useAllPosts";
 
 function Categories() {
   const [category, setCategory] = useState("");
-  const { addCategory, loading } = useAppContext();
-  const { allPosts, isFetching } = useAllPosts("categories");
+  const { addCategory, loading, formatUrlString } = useAppContext();
+  const { allCategory, isFetching } = useAllPosts();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +15,7 @@ function Categories() {
       toast.error("Empthy Catory will not add!");
       return;
     }
-    if (allPosts.find((data) => data.data == category.trim())) {
+    if (allCategory.find((data) => data.data == category.trim())) {
       toast.error(`${category} is already added`);
       return;
     }
@@ -95,21 +95,18 @@ function Categories() {
                   ))}
                 </div>
               ) : (
-                allPosts.map((cat) => {
-                  const cateLink = cat.data.replace(/\s+/g, "-").toLowerCase();
-                  return (
-                    <Link
-                      key={cat.id}
-                      to={`/blog/${cateLink}`}
-                      target="_blank"
-                      className="w-max block py-2 px-5 shadow-sm rounded-sm bg-white"
-                    >
-                      <h2 className="text-heading-600 text-center text-lg font-semibold">
-                        {cat.data}
-                      </h2>
-                    </Link>
-                  );
-                })
+                allCategory.map((cat) => (
+                  <Link
+                    key={cat.id}
+                    to={`/blog/${formatUrlString(cat.data)}`}
+                    target="_blank"
+                    className="w-max block py-2 px-5 shadow-sm rounded-sm bg-white"
+                  >
+                    <h2 className="text-heading-600 text-center text-lg font-semibold">
+                      {cat.data}
+                    </h2>
+                  </Link>
+                ))
               )}
             </div>
           </div>
