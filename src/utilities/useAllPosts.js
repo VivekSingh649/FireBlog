@@ -1,14 +1,16 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { database } from "../firebase/firebase";
+import { useAppContext } from "../context/authProvider";
 
-function useAllPosts() {
+function useAllPosts(adminId) {
   const [allPosts, setAllPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [allCategory, setAllCategory] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
   const [searchValue, setSearchValue] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const { sortPost } = useAppContext();
 
   const fetchData = async () => {
     try {
@@ -18,14 +20,20 @@ function useAllPosts() {
         ...doc.data(),
       }));
 
+      const userPosts = adminId
+        ? posts.filter((post) => post.authorId === adminId)
+        : posts;
+
+      const sortedPosts = sortPost(userPosts);
+
       const categoriesRef = await getDocs(collection(database, "categories"));
       const categories = categoriesRef.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
 
-      setAllPosts(posts);
-      setFilteredPosts(posts);
+      setAllPosts(sortedPosts);
+      setFilteredPosts(sortedPosts);
       setAllCategory(categories);
     } catch (error) {
       console.error("Error fetching data", error);
@@ -36,7 +44,7 @@ function useAllPosts() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [adminId]);
 
   useEffect(() => {
     let filtered = allPosts;
@@ -64,6 +72,7 @@ function useAllPosts() {
     selectedCategory,
     setSelectedCategory,
     fetchData,
+    setAllPosts,
   };
 }
 

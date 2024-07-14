@@ -135,9 +135,6 @@ function SignUpForm() {
             />
             Sign up with Google
           </button>
-          <button className="bg-primary-600 p-8" onClick={() => printHello()}>
-            Hello
-          </button>
         </div>
       </div>
     </>

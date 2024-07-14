@@ -6,6 +6,7 @@ import { useAppContext } from "../context/authProvider";
 import { toast } from "react-toastify";
 
 function Dashboard() {
+  const { formatUrlString, deletePost, currentUser } = useAppContext();
   const {
     filteredPosts,
     isFetching,
@@ -15,9 +16,7 @@ function Dashboard() {
     selectedCategory,
     setSelectedCategory,
     fetchData,
-  } = useAllPosts();
-  const { formatUrlString, deletePost } = useAppContext();
-
+  } = useAllPosts(currentUser.uid);
   const handleSearch = (e) => {
     const value = e.target.value;
     if (value.trim() === "") {
@@ -73,70 +72,70 @@ function Dashboard() {
           </div>
         </div>
 
-        <div className="post_lists flex flex-col gap-y-7 mx-10 mt-10">
-          {isFetching ? (
-            <SinglePostSkeleton />
-          ) : (
-            filteredPosts.map((post) => (
-              <div className="single_post p-4 shadow bg-white">
-                <div className="flex items-center">
-                  <div className="w-1/4">
-                    <Link
-                      to={`/blog/${formatUrlString(
-                        post.category
-                      )}/${formatUrlString(post.postTitle)}`}
-                      target="_blank"
-                    >
-                      <img
-                        src={post.postImage}
-                        className="object-cover w-full h-full"
-                      />
-                    </Link>
-                  </div>
-                  <div className="w-3/4 p-4">
-                    <Link
-                      to={`/blog/${formatUrlString(
-                        post.category
-                      )}/${formatUrlString(post.postTitle)}`}
-                      target="_blank"
-                    >
-                      <h5 className="text-xl font-bold text-gray-800 truncate">
-                        {post.postTitle}
-                      </h5>
-                    </Link>
-                    <p className="text-gray-600 mt-2">
-                      Created Date:
-                      {new Date(post.createDate).toLocaleString("en-us", {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
-                    </p>
-                    <p className="text-gray-600">
-                      Category:
-                      <span className="text-primary-500 font-bold">
-                        {post.category}
-                      </span>
-                    </p>
-                  </div>
-                  <div className="flex gap-y-4 flex-col items-center justify-center p-4">
-                    <button
-                      className="bg-gray-200 p-2 px-3 icon_hover"
-                      onClick={() => deletePost(post.id, fetchData)}
-                    >
-                      <i className="bi bi-trash text-lg text-heading-600"></i>
-                    </button>
-                    <Link
-                      to={`/admin/update-post/${post.id}`}
-                      className="bg-gray-200 p-2 px-3 icon_hover"
-                    >
-                      <i className="bi bi-pencil-square"></i>
-                    </Link>
+        <div className="post_lists flex flex-col gap-y-7 mx-10 py-10">
+          {isFetching
+            ? [...Array(3)].map((_, index) => (
+                <SinglePostSkeleton key={index} />
+              ))
+            : filteredPosts.map((post) => (
+                <div className="single_post p-4 shadow bg-white" key={post.id}>
+                  <div className="flex items-center">
+                    <div className="w-1/4">
+                      <Link
+                        to={`/blog/${formatUrlString(
+                          post.category
+                        )}/${formatUrlString(post.postTitle)}`}
+                        target="_blank"
+                      >
+                        <img
+                          src={post.postImage}
+                          className="object-cover w-full h-full"
+                        />
+                      </Link>
+                    </div>
+                    <div className="w-3/4 p-4">
+                      <Link
+                        to={`/blog/${formatUrlString(
+                          post.category
+                        )}/${formatUrlString(post.postTitle)}`}
+                        target="_blank"
+                      >
+                        <h5 className="text-xl font-bold text-gray-800 truncate">
+                          {post.postTitle}
+                        </h5>
+                      </Link>
+                      <p className="text-gray-600 mt-2">
+                        Created Date:
+                        {new Date(post.createDate).toLocaleString("en-us", {
+                          month: "long",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </p>
+                      <p className="text-gray-600">
+                        Category:
+                        <span className="text-primary-500 font-bold">
+                          {post.category}
+                        </span>
+                      </p>
+                    </div>
+                    <div className="flex gap-y-4 flex-col items-center justify-center p-4">
+                      <button
+                        className="bg-gray-200 p-2 px-3 icon_hover"
+                        onClick={() => deletePost(post.id, fetchData)}
+                      >
+                        <i className="bi bi-trash text-lg text-heading-600"></i>
+                      </button>
+                      <Link
+                        to={`/admin/update-post/${post.id}`}
+                        className="bg-gray-200 p-2 px-3 icon_hover"
+                      >
+                        <i className="bi bi-pencil-square"></i>
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
-          )}
+              ))}
         </div>
       </div>
     </>

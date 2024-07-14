@@ -6,9 +6,11 @@ import { Navigation, Autoplay } from "swiper/modules";
 import SlideCardSkeleton from "../skeleton/SlideCardSkeleton";
 import useAllPosts from "../utilities/useAllPosts";
 import { Link } from "react-router-dom";
+import { useAppContext } from "../context/authProvider";
 
 function HeroSection() {
-  const { allPosts, isFetching } = useAllPosts("blogPosts");
+  const { allPosts, isFetching } = useAllPosts();
+  const { formatUrlString } = useAppContext();
 
   const colors = [
     "#be123c",
@@ -64,12 +66,17 @@ function HeroSection() {
                 return (
                   <SwiperSlide key={blog.id}>
                     <div className="slideCard_wrapper">
-                      <Link className="image_handler" to={`/blog/${blog.id}`}>
+                      <Link
+                        className="image_handler"
+                        to={`/blog/${formatUrlString(
+                          blog.category
+                        )}/${formatUrlString(blog.postTitle)}`}
+                      >
                         <img src={blog.postImage} alt={blog.postTitle} />
                       </Link>
                       <div className="body_content p-6 md:p-16 md:pb-8">
                         <Link
-                          to={`/category/${blog.category}`}
+                          to={`/blog/${formatUrlString(blog.category)}`}
                           className="mb-6 slide_cate_wrapper rounded-sm py-1 md:p-2 px-3 inline-block"
                           style={{ backgroundColor: colors[random] }}
                         >
@@ -77,7 +84,11 @@ function HeroSection() {
                             {`#${blog.category}`}
                           </span>
                         </Link>
-                        <Link to={`/blog/${blog.id}`}>
+                        <Link
+                          to={`/blog/${formatUrlString(
+                            blog.category
+                          )}/${formatUrlString(blog.postTitle)}`}
+                        >
                           <h2 className="mb-6 text-3xl md:text-6xl md:max-w-[75%] text-white font-semibold">
                             {blog.postTitle}
                           </h2>

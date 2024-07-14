@@ -8,7 +8,6 @@ import { auth, database, storage } from "../firebase/firebase";
 import { toast } from "react-toastify";
 import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -154,6 +153,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const requiredFields = (fieldName, value) => {
+    if (!value) {
+      toast.error(`${fieldName} is required`);
+      return false;
+    }
+    return true;
+  };
+
+  const sortPost = (array) => {
+    return array.sort(
+      (a, b) => new Date(b.createDate) - new Date(a.createDate)
+    );
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -165,6 +178,8 @@ export const AuthProvider = ({ children }) => {
         addPost,
         formatUrlString,
         deletePost,
+        requiredFields,
+        sortPost,
       }}
     >
       {!loading.authStateChange && children}

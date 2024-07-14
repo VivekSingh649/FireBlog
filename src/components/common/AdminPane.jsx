@@ -16,6 +16,11 @@ function AdminPane() {
       iconClass: "bi-tags-fill",
       menuLink: "/admin/add-category",
     },
+    {
+      menuName: "Home",
+      iconClass: "bi bi-house",
+      menuLink: "/",
+    },
   ];
 
   return (

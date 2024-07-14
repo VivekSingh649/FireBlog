@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BlogCard from "./BlogCard";
+const BlogCard = React.lazy(() => import("./BlogCard"));
 import BlogCardSkeleton from "../skeleton/BlogCardSkeleton";
 import { toast } from "react-toastify";
 import useAllPosts from "../utilities/useAllPosts";
@@ -65,7 +65,7 @@ function Posts() {
               onChange={handleCategoryChange}
               value={selectedCategory}
             >
-              <option value="">Filter By Categoires</option>
+              <option value="">Filter By Categories</option>
               {allCategory.map((cate) => (
                 <option value={cate.data} key={cate.id}>
                   {cate.data}
@@ -89,16 +89,17 @@ function Posts() {
                 <BlogCardSkeleton listBlog={isActive} key={index} />
               ))
             : filteredPosts.map((blog) => (
-                <BlogCard
-                  listBlog={isActive}
-                  key={blog.id}
-                  singlePostLink={blog.postTitle}
-                  cateLink={blog.category}
-                  postTitle={blog.postTitle}
-                  postImage={blog.postImage}
-                  date={blog.createDate}
-                  catgory={blog.category}
-                />
+                <React.Suspense fallback={<BlogCardSkeleton />} key={blog.id}>
+                  <BlogCard
+                    listBlog={isActive}
+                    singlePostLink={blog.postTitle}
+                    cateLink={blog.category}
+                    postTitle={blog.postTitle}
+                    postImage={blog.postImage}
+                    date={blog.createDate}
+                    catgory={blog.category}
+                  />
+                </React.Suspense>
               ))}
         </div>
       </div>

@@ -145,6 +145,11 @@ textarea {
     content: "";
     z-index: 1;
   }
+  &.animate-pulse {
+    &::after {
+      background: transparent;
+    }
+  }
 }
 
 .search_box {

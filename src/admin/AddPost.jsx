@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import TextEditor from "../components/TextEditor";
 import useAllPosts from "../utilities/useAllPosts";
 import { useAppContext } from "../context/authProvider";
+import { useNavigate } from "react-router-dom";
 
 function AddPost({ updateBlog, updatePost }) {
   const editorRef = useRef(null);
-  const { handleUpload, loading, addPost } = useAppContext();
+  const { handleUpload, loading, addPost, currentUser, requiredFields } =
+    useAppContext();
   const { allCategory } = useAllPosts();
   const [formData, setFormData] = useState({
     postTitle: "",
@@ -13,7 +15,10 @@ function AddPost({ updateBlog, updatePost }) {
     postImage: "",
     blogContent: "Write your blog content here...",
     createDate: "",
+    authorId: currentUser.uid,
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (updateBlog) {
@@ -30,20 +35,31 @@ function AddPost({ updateBlog, updatePost }) {
     setFormData({ ...formData, blogContent: content });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (updatePost) {
-      updatePost(formData);
-    } else {
-      addPost(formData);
+    const isPostTitleValid = requiredFields("Post Title", formData.postTitle);
+    const isCategoryValid = requiredFields("Category", formData.category);
+    const isPostImageValid = requiredFields("Post Image", formData.postImage);
+
+    if (!isPostTitleValid || !isCategoryValid || !isPostImageValid) {
+      return;
     }
+
+    if (updatePost) {
+      await updatePost(formData);
+    } else {
+      await addPost(formData);
+    }
+    navigate("/admin/dashboard");
   };
 
   return (
     <>
       <div className="container min-h-screen w-full bg-slate-50 p-0">
         <div className="px-8 py-4 bg-white shadow sticky top-0 left-0">
-          <h1 className="text-4xl text-heading-600 font-bold">Add a post</h1>
+          <h1 className="text-4xl text-heading-600 font-bold">
+            {updateBlog ? "Update Post" : "Add a post"}
+          </h1>
         </div>
 
         <form className="mt-8 grid w-full grid-cols-12" onSubmit={handleSubmit}>
@@ -91,7 +107,7 @@ function AddPost({ updateBlog, updatePost }) {
                 src={
                   formData.postImage
                     ? formData.postImage
-                    : "https://themexriver.com/wp/magezix/wp-content/uploads/2022/05/travel-new.jpg"
+                    : "../../public/assets/placeholder.png"
                 }
                 alt={formData.postTitle}
                 className="w-full h-full object-contain object-center"

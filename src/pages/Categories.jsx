@@ -43,7 +43,9 @@ function Categories() {
             <div className="col-span-12 lg:col-span-8">
               <div className="grid gap-8 lg:grid-cols-2 gap-y-0">
                 {post.length === 0 && !loading ? (
-                  <h1>No Post Available</h1>
+                  <h1 className="lg:text-4xl text-heading-600 font-semibold">
+                    No Post Available
+                  </h1>
                 ) : loading ? (
                   [...Array(4)].map((_, index) => (
                     <BlogCardSkeleton key={index} />
@@ -51,7 +53,7 @@ function Categories() {
                 ) : (
                   post.map((blog) => (
                     <BlogCard
-                      key={blog.id}
+                      key={blog.createDate}
                       singlePostLink={blog.postTitle}
                       cateLink={blog.category}
                       postTitle={blog.postTitle}

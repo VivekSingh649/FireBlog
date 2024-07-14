@@ -21,7 +21,12 @@ function BlogCard({
           singlePostLink
         )}`}
       >
-        <img className="border-radius-5" src={postImage} alt="img" />
+        <img
+          className="border-radius-5"
+          src={postImage}
+          alt="img"
+          loading="lazy"
+        />
       </Link>
       <div className="details">
         <p className="cat bg-primary-600">{catgory}</p>

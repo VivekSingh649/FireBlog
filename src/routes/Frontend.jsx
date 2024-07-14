@@ -6,6 +6,7 @@ import Categories from "../pages/Categories";
 import SingleBlog from "../pages/SingleBlog";
 import Signin from "../pages/Signin";
 import Signup from "../pages/SignUpForm";
+import Footer from "../components/common/Footer";
 
 function Frontend() {
   return (
@@ -18,6 +19,7 @@ function Frontend() {
         <Route path="/sign-in" element={<Signin />} />
         <Route path="/sign-up" element={<Signup />} />
       </Routes>
+      <Footer />
     </>
   );
 }
