@@ -4,7 +4,7 @@ function SlideCardSkeleton() {
   return (
     <div className="slideCard_wrapper animate-pulse">
       <div className="image_handler bg-gray-300 h-64 w-full">
-        <img src="../../public/assets/placeholder.png" alt="" />
+        <img src="/public/assets/placeholder.png" alt="" />
       </div>
       <div className="body_content p-6 md:p-16 md:pb-8">
         <div className="mb-6 slide_cate_wrapper  py-1 md:p-2 px-3 inline-block bg-gray-400 rounded-full h-6 w-24"></div>

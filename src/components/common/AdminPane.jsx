@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useAppContext } from "../../context/authProvider";
+import { useAppContext } from "/context/authProvider";
 
 function AdminPane() {
   const { currentUser } = useAppContext();
@@ -27,7 +27,7 @@ function AdminPane() {
     <aside className="flex flex-col w-72 h-screen px-4 py-8 overflow-y-auto bg-primary-900 border-r">
       <Link to="/" className="mx-auto">
         <img
-          src="../../public/Firebase White logo.svg"
+          src="/public/Firebase White logo.svg"
           className="h-12"
           alt="FireBlog Logo"
         />

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAppContext } from "../../context/authProvider";
-import useAllPosts from "../../utilities/useAllPosts";
+import { useAppContext } from "/context/authProvider";
+import useAllPosts from "/utilities/useAllPosts";
 
 function PostSidebar() {
   const { formatUrlString } = useAppContext();
