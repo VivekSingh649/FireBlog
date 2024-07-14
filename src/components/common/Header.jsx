@@ -83,7 +83,7 @@ function Header() {
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <img
-              src="/public/FireBlog Logo.svg"
+              src="./public/FireBlog Logo.svg"
               className="h-12"
               alt="Flowbite Logo"
             />
