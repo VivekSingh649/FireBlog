@@ -9,7 +9,7 @@ export default function TextEditor({
   return (
     <>
       <Editor
-        apiKey="802adbao7qmse7otfvqdnjzcs4j3vh86axbry4hij8v0iujs"
+        apiKey="j1y96de7pbv71wfxyd2b6cz72r3cyxog1k8zqoxqathtbr3c"
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue={initialValue}
         init={{
