@@ -51,7 +51,7 @@ const SignUpForm = () => {
         password: "",
         confirmPassword: "",
       });
-      naviage("/sign-in");
+      naviage("/admin/dashboard");
     }
   };
 
