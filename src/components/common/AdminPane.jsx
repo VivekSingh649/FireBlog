@@ -28,7 +28,7 @@ function AdminPane() {
     <aside className="flex flex-col w-72 h-screen px-4 py-8 overflow-y-auto bg-primary-900 border-r">
       <Link to="/" className="mx-auto">
         <img
-          src="/public/Firebase White logo.svg"
+          src="./public/Firebase White logo.svg"
           className="h-12"
           alt="FireBlog Logo"
         />

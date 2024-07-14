@@ -107,7 +107,7 @@ function AddPost({ updateBlog, updatePost }) {
                 src={
                   formData.postImage
                     ? formData.postImage
-                    : "/public/assets/placeholder.png"
+                    : "./public/assets/placeholder.png"
                 }
                 alt={formData.postTitle}
                 className="w-full h-full object-contain object-center"
