@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { auth } from "/firebase/firebase";
+import { auth } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
 import { toast } from "react-toastify";
-import { useAppContext } from "/context/authProvider";
+import { useAppContext } from "../../context/authProvider";
 
 function Header() {
   const categories = ["sports", "technology", "politics", "traveling"];
@@ -83,7 +83,7 @@ function Header() {
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <img
-              src="./public/FireBlog Logo.svg"
+              src="/public/FireBlog Logo.svg"
               className="h-12"
               alt="Flowbite Logo"
             />

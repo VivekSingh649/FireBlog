@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useAppContext } from "/context/authProvider";
+import { useAppContext } from "../../context/authProvider";
+// import { useAppContext } from "/context/authProvider";
 
 function AdminPane() {
   const { currentUser } = useAppContext();
