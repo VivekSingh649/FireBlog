@@ -3,6 +3,7 @@ import { useAppContext } from "../context/authProvider";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAllPosts from "../utilities/useAllPosts";
+import { Helmet } from "react-helmet";
 
 function Categories() {
   const [category, setCategory] = useState("");
@@ -24,6 +25,9 @@ function Categories() {
   };
   return (
     <>
+      <Helmet>
+        <title>{`FireBlog | Add Category`}</title>
+      </Helmet>
       <div className="container min-h-screen w-full bg-slate-50 p-0">
         <div className="px-8 py-4 bg-white shadow sticky top-0 left-0">
           <h1 className="text-4xl text-heading-600 font-bold">

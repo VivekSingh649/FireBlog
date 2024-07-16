@@ -512,3 +512,122 @@ button:active {
   cursor: no-drop;
   background-color: #831f0b;
 }
+
+.main-content {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  ul,
+  img {
+    margin-bottom: 15px;
+  }
+
+  h1 {
+    font-size: 2.5rem; /* Base size for larger screens */
+  }
+
+  h2 {
+    font-size: 2.25rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  h4 {
+    font-size: 1.75rem;
+  }
+
+  h5 {
+    font-size: 1.5rem;
+  }
+
+  h6 {
+    font-size: 1.25rem;
+  }
+
+  p,
+  a,
+  ul {
+    font-size: 1rem;
+  }
+
+  strong {
+    font-weight: bold;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+  .main-content {
+    h1 {
+      font-size: 2.25rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    h3 {
+      font-size: 1.75rem;
+    }
+
+    h4 {
+      font-size: 1.5rem;
+    }
+
+    h5 {
+      font-size: 1.25rem;
+    }
+
+    h6 {
+      font-size: 1rem;
+    }
+
+    p,
+    a,
+    ul {
+      font-size: 0.875rem; /* Slightly smaller font size */
+    }
+  }
+}
+
+/* Small devices (phones, 600px and down) */
+@media (max-width: 600px) {
+  .main-content {
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    h4 {
+      font-size: 1.25rem;
+    }
+
+    h5 {
+      font-size: 1rem;
+    }
+
+    h6 {
+      font-size: 0.875rem;
+    }
+
+    p,
+    a,
+    ul {
+      font-size: 0.75rem; /* Smaller font size for small screens */
+    }
+  }
+}

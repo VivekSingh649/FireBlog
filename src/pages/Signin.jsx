@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth } from "../firebase/firebase";
 import { useAppContext } from "../context/authProvider";
+import { Helmet } from "react-helmet";
 
 function SignUpForm() {
   const [signupLoading, setSignupLoading] = useState(false);
@@ -59,6 +60,9 @@ function SignUpForm() {
 
   return (
     <>
+      <Helmet>
+        <title>{`FireBlog | Sign in`}</title>
+      </Helmet>
       <div className="py-12 flex items-center justify-center bg-gray-50">
         <div className="max-w-md w-full bg-white shadow-md rounded-lg p-8">
           <h2 className="text-2xl font-bold mb-6 text-center">Sign In</h2>

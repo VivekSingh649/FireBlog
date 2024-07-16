@@ -6,6 +6,7 @@ import PostInfo from "../components/BlogCard/PostInfo";
 import { collection, getDocs } from "firebase/firestore";
 import { database } from "../firebase/firebase";
 import { useAppContext } from "../context/authProvider";
+import { Helmet } from "react-helmet";
 
 function SingleBlog() {
   const { category, postname } = useParams();
@@ -35,11 +36,14 @@ function SingleBlog() {
 
   return (
     <>
+      <Helmet>
+        <title>{`FireBlog | ${post.postTitle}`}</title>
+      </Helmet>
       <PostBread
         postName={post.postTitle}
-        postLink="!#"
-        cateLink={`/blog/${category}`}
-        cateName={category}
+        postLink={formatUrlString(post.postTitle)}
+        cateLink={`/blog/${formatUrlString(post.category)}`}
+        cateName={post.category}
       />
       <div className="bg-slate-50 py-16">
         <div className="container">

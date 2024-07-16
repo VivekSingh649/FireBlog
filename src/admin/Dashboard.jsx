@@ -4,6 +4,7 @@ import SinglePostSkeleton from "../skeleton/SinglePostSkeleton";
 import useAllPosts from "../utilities/useAllPosts";
 import { useAppContext } from "../context/authProvider";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 function Dashboard() {
   const { formatUrlString, deletePost, currentUser } = useAppContext();
@@ -33,6 +34,9 @@ function Dashboard() {
 
   return (
     <>
+      <Helmet>
+        <title>{`FireBlog | Dashboard`}</title>
+      </Helmet>
       <div className="container min-h-screen w-full bg-slate-50 p-0">
         <div className="shadow px-8 py-4 bg-white items-center flex justify-between flex-wrap lg:flex-nowrap gap-y-4 sticky top-0 left-0 z-50">
           <h1 className="text-4xl text-heading-600 font-bold leading-none">
@@ -59,9 +63,7 @@ function Dashboard() {
                 value={selectedCategory}
                 onChange={handleCategoryChange}
               >
-                <option value="" disabled>
-                  Filter By Categoires
-                </option>
+                <option value="">Filter By Categoires</option>
                 {allCategory.map((cate) => (
                   <option value={cate.data} key={cate.id}>
                     {cate.data}

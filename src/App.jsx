@@ -6,6 +6,7 @@ import TopLoadingBar from "react-top-loading-bar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./context/protectedRoute";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const loadingBarRef = useRef(null);
@@ -29,6 +30,7 @@ function App() {
         fixed={true}
       />
       <ToastContainer />
+      <ScrollToTop />
       <Routes>
         <Route path="/*" element={<Frontend />} />
         <Route

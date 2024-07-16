@@ -3,6 +3,7 @@ import TextEditor from "../components/TextEditor";
 import useAllPosts from "../utilities/useAllPosts";
 import { useAppContext } from "../context/authProvider";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function AddPost({ updateBlog, updatePost }) {
   const editorRef = useRef(null);
@@ -55,6 +56,10 @@ function AddPost({ updateBlog, updatePost }) {
 
   return (
     <>
+      <Helmet>
+        <title>{`FireBlog | Add Post`}</title>
+      </Helmet>
+
       <div className="container min-h-screen w-full bg-slate-50 p-0">
         <div className="px-8 py-4 bg-white shadow sticky top-0 left-0">
           <h1 className="text-4xl text-heading-600 font-bold">

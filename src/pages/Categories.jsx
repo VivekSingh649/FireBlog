@@ -7,6 +7,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { database } from "../firebase/firebase";
 import { useAppContext } from "../context/authProvider";
 import BlogCardSkeleton from "../skeleton/BlogCardSkeleton";
+import { Helmet } from "react-helmet";
 
 function Categories() {
   const { category } = useParams();
@@ -36,6 +37,9 @@ function Categories() {
 
   return (
     <>
+      <Helmet>
+        <title>{`FireBlog | ${category}`}</title>
+      </Helmet>
       <CateBread cateLink={`/blog/${category}`} cateName={category} />
       <div className="bg-slate-50 py-16">
         <div className="container">

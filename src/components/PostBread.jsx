@@ -15,7 +15,7 @@ function PostBread({ postName, postLink, cateName, cateLink }) {
                 Home
               </Link>
               <i className="bi text-heading-600 text-center bi-chevron-right"></i>
-              <Link href={cateLink} className="text-heading-600 text-center">
+              <Link to={cateLink} className="text-heading-600 text-center">
                 {cateName}
               </Link>
               <i className="bi text-heading-600 text-center bi-chevron-right"></i>

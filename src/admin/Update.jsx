@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { database } from "../firebase/firebase";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 function Update() {
   const { id } = useParams();
@@ -42,6 +43,9 @@ function Update() {
 
   return (
     <>
+      <Helmet>
+        <title>{`FireBlog | Update`}</title>
+      </Helmet>
       <AddPost updateBlog={singlePost} updatePost={updatePost} />
     </>
   );
