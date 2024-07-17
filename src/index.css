@@ -101,7 +101,7 @@ textarea {
   height: 550px;
   overflow: hidden;
   position: relative;
-  border-radius: 20px;
+  /* border-radius: 20px; */
 
   .image_handler {
     width: 100%;
@@ -420,7 +420,6 @@ aside {
         box-shadow: 0 3px 20px rgba(0, 33, 71, 0.06);
         padding: 15px 20px;
         display: flex;
-        align-items: center;
         gap: 15px;
       }
     }
@@ -593,6 +592,14 @@ button:active {
     a,
     ul {
       font-size: 0.875rem; /* Slightly smaller font size */
+    }
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 35px;
+    height: 35px;
+    &::after {
+      font-size: 20px;
     }
   }
 }

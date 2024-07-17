@@ -65,7 +65,7 @@ function HeroSection() {
                 const random = Math.floor(Math.random() * colors.length);
                 return (
                   <SwiperSlide key={blog.id}>
-                    <div className="slideCard_wrapper">
+                    <div className="slideCard_wrapper lg:rounded-2xl">
                       <Link
                         className="image_handler"
                         to={`/blog/${formatUrlString(

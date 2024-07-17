@@ -10,7 +10,7 @@ function PostBread({ postName, postLink, cateName, cateLink }) {
             <h2 className="text-3xl md:text-6xl text-heading-600 text-center">
               {postName}
             </h2>
-            <div className="flex mt-4 justify-center">
+            <div className="hidden mt-4 justify-center lg:flex">
               <Link to="/" className="text-heading-600 text-center">
                 Home
               </Link>

@@ -107,7 +107,7 @@ function AddPost({ updateBlog, updatePost }) {
             />
           </div>
           <div className="col-span-4 p-8">
-            <div className="w-full mb-6 bg-white p-4 h-56 overflow-hidden">
+            <div className="w-full mb-6 bg-white p-4 pb-8 h-56 overflow-hidden">
               <img
                 src={
                   formData.postImage
@@ -117,9 +117,14 @@ function AddPost({ updateBlog, updatePost }) {
                 alt={formData.postTitle}
                 className="w-full h-full object-contain object-center"
               />
+              {!formData.postImage && (
+                <p className="mt-1 text-sm text-primary-500">
+                  File size must be less than 600KB.
+                </p>
+              )}
             </div>
 
-            {loading.progress > 0 && loading.progress < 100 ? (
+            {loading.progress && loading.progress < 100 ? (
               <>
                 <div
                   class={`inline-block mb-2 ms-[calc(${loading.progress}%-1.25rem)] py-0.5 px-1.5 bg-primary-50 border border-primary-200 text-xs font-medium text-primary-600 rounded-lg`}

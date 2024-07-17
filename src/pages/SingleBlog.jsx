@@ -60,7 +60,7 @@ function SingleBlog() {
                 dangerouslySetInnerHTML={{ __html: post.blogContent }}
               />
             </div>
-            <div className="ml-8 col-span-12 lg:col-span-4">
+            <div className="lg:ml-8 col-span-12 lg:col-span-4">
               <PostSidebar
                 cateLink={category}
                 singlePostLink="Empowering future with solar"

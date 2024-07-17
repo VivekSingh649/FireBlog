@@ -69,6 +69,18 @@ export const AuthProvider = ({ children }) => {
     }));
 
     const file = e.target.files[0];
+
+    const fileSize = file.size / 1024;
+
+    if (fileSize >= 600) {
+      toast.info("File size must be less than 600KB.");
+      setLoading((prevState) => ({
+        ...prevState,
+        imageUploading: false,
+      }));
+      return;
+    }
+
     try {
       const imageRef = ref(storage, `images/${file.name}`);
       const uploadTask = uploadBytesResumable(imageRef, file);
@@ -84,8 +96,8 @@ export const AuthProvider = ({ children }) => {
           }));
         },
         (error) => {
-          console.error(error);
-          toast.error("Error occurred during upload. Please try again.");
+          toast.error("Error occurred. Please try again.");
+          console.error("Error during image upload", error);
           setLoading((prevState) => ({
             ...prevState,
             imageUploading: false,
@@ -146,7 +158,11 @@ export const AuthProvider = ({ children }) => {
   const deletePost = async (id, Fetch) => {
     try {
       const postRef = doc(database, "blogPosts", id);
-      await deleteDoc(postRef);
+      let userSure = confirm("Would you really like to delete this blog?");
+      if (userSure) {
+        await deleteDoc(postRef);
+        toast.success("Blog Deleted");
+      }
       Fetch();
     } catch (error) {
       toast.error(error);

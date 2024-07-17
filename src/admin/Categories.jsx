@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet";
 function Categories() {
   const [category, setCategory] = useState("");
   const { addCategory, loading, formatUrlString } = useAppContext();
-  const { allCategory, isFetching } = useAllPosts();
+  const { allCategory, isFetching, fetchData } = useAllPosts();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,6 +22,7 @@ function Categories() {
     }
     await addCategory(category.trim());
     setCategory("");
+    fetchData();
   };
   return (
     <>

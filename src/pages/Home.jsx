@@ -10,7 +10,7 @@ function Home() {
         <title>{`FireBlog | A Blogging Website With Firebase`}</title>
       </Helmet>
       <HeroSection />
-      <div className="py-16 container bg-primary-50 mt-4">
+      <div className="py-16 container bg-primary-50">
         <Posts />
       </div>
     </>

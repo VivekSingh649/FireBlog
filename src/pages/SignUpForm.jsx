@@ -7,6 +7,10 @@ import { Helmet } from "react-helmet";
 
 const SignUpForm = () => {
   const [signupLoading, setSignupLoading] = useState(false);
+  const [showPass, setShowPass] = useState({
+    password: false,
+    confirmPassword: false,
+  });
   const naviage = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
@@ -131,11 +135,19 @@ const SignUpForm = () => {
                   name="password"
                   onChange={handleChange}
                   value={formData.password}
-                  type="password"
+                  type={showPass ? "text" : "password"}
                   required
                   className="block w-full px-3 py-2 border border-solid border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
                 />
-                <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                <span
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                  onClick={() =>
+                    setShowPass({
+                      ...showPass,
+                      confirmPassword: !showPass.confirmPassword,
+                    })
+                  }
+                >
                   <i className="bi bi-eye"></i>
                 </span>
               </div>
@@ -153,11 +165,19 @@ const SignUpForm = () => {
                   name="confirmPassword"
                   onChange={handleChange}
                   value={formData.confirmPassword}
-                  type="password"
+                  type={showPass ? "text" : "password"}
                   required
                   className="block w-full px-3 py-2 border border-solid border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
                 />
-                <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                <span
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                  onClick={() =>
+                    setShowPass({
+                      ...showPass,
+                      confirmPassword: !showPass.confirmPassword,
+                    })
+                  }
+                >
                   <i className="bi bi-eye"></i>
                 </span>
               </div>

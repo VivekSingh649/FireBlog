@@ -15,7 +15,7 @@ function PostSidebar() {
           <ul>
             {allPosts.slice(0, 5).map((blog) => (
               <li className="bg-white rounded-xl" key={blog.id}>
-                <div className="media">
+                <div className="media flex-col lg:flex-row items-start lg:items-center">
                   <div className="media-left">
                     <img
                       src={blog.postImage}
