@@ -25,6 +25,9 @@ FireBlog is a full-featured blogging platform built with React, Firebase, and Vi
 - **Protected Routes**: Admin routes are protected and only accessible to authenticated users.
 - **Lazy Loading**: Components are lazy-loaded to improve performance.
 - **SEO Optimization**: Each page has dynamic meta tags for better SEO.
+- **File Upload Limit**: Limits file uploads to 600KB to ensure performance.
+- **Custom Hooks**: Utilizes custom hooks for data fetching and state management.
+- **App Context**: Centralized app context for managing global state.
 
 ### Admin Panel
 
@@ -44,15 +47,34 @@ FireBlog is a full-featured blogging platform built with React, Firebase, and Vi
 - **Single Post Page**: Detailed view of a single blog post with comments.
 - **Search Functionality**: Search posts by title.
 - **Responsive Design**: Fully responsive design for mobile, tablet, and desktop.
-  ![image](./public/features/FireBlog%205.png)
 
 ### Additional Features
 
-![image](./public/features/FireBlog%206.png)
+![image](./public/features/FireBlog%205.png)
 
 - **Loading Bar**: Top loading bar to indicate page loading.
 - **Toasts**: Notifications for actions and errors.
 - **Scroll To Top**: Automatically scrolls to the top of the page on navigation.
+
+### Advanced Features
+
+![image](./public/features/FireBlog%206.png)
+
+- **Protected Route**: Ensures certain routes are only accessible to authenticated users.
+- **Firebase CRUD Operations**: Complete Create, Read, Update, Delete operations using Firebase Firestore.
+- **Custom Hooks**: Custom hooks like `useAllPosts` for managing blog posts.
+- **App Context**: Using React Context API for global state management.
+- **Error Handling**: Comprehensive error handling and user feedback through toasts.
+
+### Additional Information
+
+- **File Upload Limit:** This feature ensures users cannot upload files larger than 600KB, enhancing performance and preventing excessive data usage.
+- **Custom Hooks:** Custom hooks like `useAllPosts` are used for efficient data management and code reusability.
+- **App Context:** The app uses React Context API to manage global state, such as user authentication status and theme settings.
+- **Protected Route:** The `ProtectedRoute` component ensures that only authenticated users can access certain routes, enhancing security.
+- **Firebase CRUD Operations:** The app performs Create, Read, Update, and Delete operations using Firebase Firestore, providing a robust backend solution.
+
+By adding these additional features and points, the README file is more comprehensive and showcases the depth and functionality of your project.
 
 ## Installation
 
@@ -66,4 +88,23 @@ FireBlog is a full-featured blogging platform built with React, Firebase, and Vi
 ```sh
 git clone https://github.com/yourusername/fireblog.git
 cd fireblog
+```
+
+# Install Dependencies
+
+```sh
+npm install
+```
+
+# Environment Variables
+
+Create a .env file in the root of your project and add your Firebase configuration:
+
+```sh
+VITE_API_KEY=your_api_key
+VITE_AUTH_DOMAIN=your_auth_domain
+VITE_PROJECT_ID=your_project_id
+VITE_STORAGE_BUCKET=your_storage_bucket
+VITE_MESSAGING_SENDER_ID=your_messaging_sender_id
+VITE_APP_ID=your_app_id
 ```
