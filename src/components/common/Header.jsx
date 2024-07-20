@@ -6,10 +6,10 @@ import { toast } from "react-toastify";
 import { useAppContext } from "../../context/authProvider";
 
 function Header() {
-  const categories = ["sports", "technology", "politics", "traveling"];
+  const categories = ["sports", "technology", "Food and Recipes", "traveling"];
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const { currentUser } = useAppContext();
+  const { currentUser, formatUrlString } = useAppContext();
 
   const handleSignOut = async () => {
     try {
@@ -146,7 +146,7 @@ function Header() {
               {categories.map((menu, idx) => (
                 <li key={idx}>
                   <NavLink
-                    to={`/blog/${menu}`}
+                    to={`/blog/${formatUrlString(menu)}`}
                     className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0"
                   >
                     {menu}
