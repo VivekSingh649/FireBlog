@@ -55,17 +55,20 @@ function Categories() {
                     <BlogCardSkeleton key={index} />
                   ))
                 ) : (
-                  post.map((blog) => (
-                    <BlogCard
-                      key={blog.createDate}
-                      singlePostLink={blog.postTitle}
-                      cateLink={blog.category}
-                      postTitle={blog.postTitle}
-                      postImage={blog.postImage}
-                      date={blog.createDate}
-                      catgory={blog.category}
-                    />
-                  ))
+                  post.map(
+                    (blog) =>
+                      blog.publish && (
+                        <BlogCard
+                          key={blog.createDate}
+                          singlePostLink={blog.postTitle}
+                          cateLink={blog.category}
+                          postTitle={blog.postTitle}
+                          postImage={blog.postImage}
+                          date={blog.createDate}
+                          catgory={blog.category}
+                        />
+                      )
+                  )
                 )}
               </div>
             </div>

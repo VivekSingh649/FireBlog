@@ -64,62 +64,64 @@ function HeroSection() {
             : allPosts.slice(0, 7).map((blog) => {
                 const random = Math.floor(Math.random() * colors.length);
                 return (
-                  <SwiperSlide key={blog.id}>
-                    <div className="slideCard_wrapper lg:rounded-2xl">
-                      <Link
-                        className="image_handler"
-                        to={`/blog/${formatUrlString(
-                          blog.category
-                        )}/${formatUrlString(blog.postTitle)}`}
-                      >
-                        <img src={blog.postImage} alt={blog.postTitle} />
-                      </Link>
-                      <div className="body_content p-6 md:p-16 md:pb-8">
+                  blog.publish && (
+                    <SwiperSlide key={blog.id}>
+                      <div className="slideCard_wrapper lg:rounded-2xl">
                         <Link
-                          to={`/blog/${formatUrlString(blog.category)}`}
-                          className="mb-6 slide_cate_wrapper rounded-sm py-1 md:p-2 px-3 inline-block"
-                          style={{ backgroundColor: colors[random] }}
-                        >
-                          <span className="uppercase text-sm md:text-lg text-white">
-                            {`#${blog.category}`}
-                          </span>
-                        </Link>
-                        <Link
+                          className="image_handler"
                           to={`/blog/${formatUrlString(
                             blog.category
                           )}/${formatUrlString(blog.postTitle)}`}
                         >
-                          <h2 className="mb-6 text-3xl md:text-6xl md:max-w-[75%] text-white font-semibold">
-                            {blog.postTitle}
-                          </h2>
+                          <img src={blog.postImage} alt={blog.postTitle} />
                         </Link>
-                        <div className="flex items-center gap-4">
-                          <div className="flex items-center">
-                            <img
-                              src="/assets/admin-vivek.png"
-                              alt="Admin"
-                              className="h-8 w-8 rounded-full mr-2"
-                            />
-                            <span className="text-white text-lg">Admin</span>
-                          </div>
-                          <span className="text-white mx-2">|</span>
-                          <div className="date">
-                            <i className="bi bi-calendar4-week text-white mr-2"></i>
-                            <span className="text-white text-lg">
-                              {new Date(blog.createDate).toLocaleString(
-                                "en-US",
-                                {
-                                  month: "long",
-                                  year: "numeric",
-                                  day: "numeric",
-                                }
-                              )}
+                        <div className="body_content p-6 md:p-16 md:pb-8">
+                          <Link
+                            to={`/blog/${formatUrlString(blog.category)}`}
+                            className="mb-6 slide_cate_wrapper rounded-sm py-1 md:p-2 px-3 inline-block"
+                            style={{ backgroundColor: colors[random] }}
+                          >
+                            <span className="uppercase text-sm md:text-lg text-white">
+                              {`#${blog.category}`}
                             </span>
+                          </Link>
+                          <Link
+                            to={`/blog/${formatUrlString(
+                              blog.category
+                            )}/${formatUrlString(blog.postTitle)}`}
+                          >
+                            <h2 className="mb-6 text-3xl md:text-6xl md:max-w-[75%] text-white font-semibold">
+                              {blog.postTitle}
+                            </h2>
+                          </Link>
+                          <div className="flex items-center gap-4">
+                            <div className="flex items-center">
+                              <img
+                                src="/assets/admin-vivek.png"
+                                alt="Admin"
+                                className="h-8 w-8 rounded-full mr-2"
+                              />
+                              <span className="text-white text-lg">Admin</span>
+                            </div>
+                            <span className="text-white mx-2">|</span>
+                            <div className="date">
+                              <i className="bi bi-calendar4-week text-white mr-2"></i>
+                              <span className="text-white text-lg">
+                                {new Date(blog.createDate).toLocaleString(
+                                  "en-US",
+                                  {
+                                    month: "long",
+                                    year: "numeric",
+                                    day: "numeric",
+                                  }
+                                )}
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </SwiperSlide>
+                    </SwiperSlide>
+                  )
                 );
               })}
         </Swiper>

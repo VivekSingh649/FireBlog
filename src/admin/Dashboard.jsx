@@ -107,7 +107,7 @@ function Dashboard() {
                         </h5>
                       </Link>
                       <p className="text-gray-600 mt-2">
-                        Created Date:
+                        Created Date:{" "}
                         {new Date(post.createDate).toLocaleString("en-us", {
                           month: "long",
                           day: "numeric",
@@ -115,10 +115,20 @@ function Dashboard() {
                         })}
                       </p>
                       <p className="text-gray-600">
-                        Category:
+                        Category:{" "}
                         <span className="text-primary-500 font-bold">
                           {post.category}
                         </span>
+                      </p>
+                      <p className="text-gray-600">
+                        Status:{" "}
+                        {post.publish ? (
+                          <span className="text-green-500 font-bold">Live</span>
+                        ) : (
+                          <span className="text-primary-500 font-bold">
+                            Draft
+                          </span>
+                        )}
                       </p>
                     </div>
                     <div className="flex gap-y-4 flex-col items-center justify-center p-4">

@@ -88,19 +88,25 @@ function Posts() {
             ? [...Array(8)].map((_, index) => (
                 <BlogCardSkeleton listBlog={isActive} key={index} />
               ))
-            : filteredPosts.map((blog) => (
-                <React.Suspense fallback={<BlogCardSkeleton />} key={blog.id}>
-                  <BlogCard
-                    listBlog={isActive}
-                    singlePostLink={blog.postTitle}
-                    cateLink={blog.category}
-                    postTitle={blog.postTitle}
-                    postImage={blog.postImage}
-                    date={blog.createDate}
-                    catgory={blog.category}
-                  />
-                </React.Suspense>
-              ))}
+            : filteredPosts.map(
+                (blog) =>
+                  blog.publish && (
+                    <React.Suspense
+                      fallback={<BlogCardSkeleton />}
+                      key={blog.id}
+                    >
+                      <BlogCard
+                        listBlog={isActive}
+                        singlePostLink={blog.postTitle}
+                        cateLink={blog.category}
+                        postTitle={blog.postTitle}
+                        postImage={blog.postImage}
+                        date={blog.createDate}
+                        catgory={blog.category}
+                      />
+                    </React.Suspense>
+                  )
+              )}
         </div>
       </div>
     </div>

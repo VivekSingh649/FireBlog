@@ -27,7 +27,6 @@ function Update() {
       }
     };
     fetchUser();
-    console.log(singlePost);
   }, [id]);
 
   const updatePost = async (data) => {

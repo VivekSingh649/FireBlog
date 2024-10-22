@@ -461,6 +461,10 @@ aside {
     outline: 0;
     border: 0;
     font-size: 16px;
+    border: 1px solid #ddd;
+    &:focus {
+      border: 1px solid var(--primary-color);
+    }
   }
 }
 

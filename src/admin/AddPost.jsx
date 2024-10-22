@@ -16,6 +16,7 @@ function AddPost({ updateBlog, updatePost }) {
     postImage: "",
     blogContent: "Write your blog content here...",
     createDate: "",
+    publish: "false",
     authorId: currentUser.uid,
   });
 
@@ -158,6 +159,23 @@ function AddPost({ updateBlog, updatePost }) {
                 className="w-full text-gray-400 text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-3 file:px-4 file:mr-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-gray-500 rounded"
               />
             </div>
+
+            {currentUser.uid === "1yBrhZgjcBgM1uCR2YmRl25tXAv1" && (
+              <div className="input_wrapper shadow-sm mb-6">
+                <p className="text-lg capitalize font-medium mb-1 text-heading-600">
+                  Publish
+                </p>
+                <select
+                  name="publish"
+                  id="publish"
+                  onChange={handleOnChange}
+                  value={formData.publish}
+                >
+                  <option value="fasle">Draft</option>
+                  <option value="true">Active</option>
+                </select>
+              </div>
+            )}
 
             <button
               type="submit"
